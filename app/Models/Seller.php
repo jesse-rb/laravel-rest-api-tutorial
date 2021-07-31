@@ -5,17 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class Seller extends Model
 {
     use HasFactory;
 
-    protected $table = 'products'; // Not necessary when following convention
-
     protected $fillable = [
         'name',
-        'slug',
-        'description',
-        'price',
-        'seller_id'
+        'about'
     ];
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 }

@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use \App\Models\Product;
-use \App\Models\Seller;
+use App\Models\Seller;
 
-class ProductController extends Controller
+class SellerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +14,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return Product::all();
+        return Seller::all();
     }
 
     /**
@@ -27,17 +26,11 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'slug' => 'required',
-            'price' => 'required',
-            'seller_id' => 'required'
+            'name' => 'string|required',
+            'about' => 'string'
         ]);
 
-        if (!Seller::find($request['seller_id'])) {
-            return 'Seller does not exist';
-        }
-
-        return Product::create($request->all());
+        return Seller::create($request->all());
     }
 
     /**
@@ -48,7 +41,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        return Product::find($id);
+        return Seller::find($id);
     }
 
     /**
@@ -60,12 +53,9 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if (!Seller::find($request['seller_id'])) {
-            return 'Seller does not exist';
-        }
-        $product = Product::find($id);
-        $product->update($request->all());
-        return $product;
+        $seller = Seller::find($id);
+        $seller->update($request->all());
+        return $seller;
     }
 
     /**
@@ -76,7 +66,7 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        return Product::destroy($id);
+        return Seller::destroy($id);
     }
 
     /**
@@ -87,6 +77,6 @@ class ProductController extends Controller
      */
     public function search($name)
     {
-        return Product::where('name', 'like', '%'.$name.'%')->get(); // Search for name which wraps name parameter
+        return Seller::where('name', 'like', '%'.$name.'%')->get(); // Search for name which wraps name parameter
     }
 }
