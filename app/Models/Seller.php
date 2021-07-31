@@ -13,4 +13,9 @@ class Seller extends Model
         'name',
         'about'
     ];
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 }

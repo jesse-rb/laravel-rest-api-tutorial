@@ -17,7 +17,7 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug');
-            $table->string('description')->nullable();
+            $table->string('description', 1000)->nullable();
             $table->decimal('price', 5, 2);
             $table->unsignedBigInteger('seller_id')->comment('Seller id foreign key');
             $table->foreign('seller_id')->references('id')->on('sellers')->comment('References id from the sellers table');

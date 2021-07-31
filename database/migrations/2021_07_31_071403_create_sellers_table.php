@@ -16,7 +16,7 @@ class CreateSellersTable extends Migration
         Schema::create('sellers', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('about')->nullable();
+            $table->string('about', 1000)->nullable();
             $table->timestamps();
         });
     }
